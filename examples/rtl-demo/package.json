@@ -1,0 +1,19 @@
+{
+  "name": "blockly-rtl-demo",
+  "version": "0.0.0",
+  "private": true,
+  "blocklyDemoConfig": {
+    "title": "RTL",
+    "description": "See what Blockly looks like in right-to-left mode (for Arabic and Hebrew).",
+    "files": [
+      "index.html",
+      "./node_modules/blockly/*_compressed.js",
+      "./node_modules/blockly/*_compressed.js.map",
+      "./node_modules/blockly/msg/ar.js",
+      "./node_modules/blockly/media/*"
+    ]
+  },
+  "dependencies": {
+    "blockly": "^10.0.0"
+  }
+}
