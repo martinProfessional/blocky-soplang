@@ -35,16 +35,11 @@ import '@blockly/field-date';
 
 let reactDateField = {
         "type": "test_react_date_field",
-        "message0": "date field: %1 %2",
+        "message0": "date field: %1",
         "args0": [
             {
                 "type": "field_date",
                 "name": "DATE",
-                "date": "2020-02-20"
-            },
-            {
-                "type": "field_date",
-                "name": "Time",
                 "date": "2020-02-20"
             }
         ],
