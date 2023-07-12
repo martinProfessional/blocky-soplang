@@ -36,19 +36,13 @@ import '@blockly/field-date';
 
 let reactDateField = {
         "type": "test_react_date_field",
-        "message0": "date field: %1 %2",
+        "message0": "date field: %1",
         "args0": [
             {
                 "type": "field_date",
                 "name": "DATE",
                 "date": "2023-07-12"
-            },
-
-            {
-              "type": "field_date",
-              "name": "DATE",
-              "date": "2023-07-15"
-          }
+            }
         ],
         "previousStatement": null,
         "nextStatement": null,
