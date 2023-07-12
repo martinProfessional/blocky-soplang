@@ -30,17 +30,36 @@ import * as Blockly from 'blockly/core';
 // Since we're using json to initialize the field, we'll need to import it.
 import '../fields/BlocklyReactField';
 import '../fields/DateField';
+import '../fields/LoopField'
 
 import '@blockly/field-date';
 
 let reactDateField = {
         "type": "test_react_date_field",
-        "message0": "date field: %1",
+        "message0": "date field: %1 %2",
         "args0": [
             {
                 "type": "field_date",
                 "name": "DATE",
-                "date": "2020-02-20"
+                "date": "2023-07-12"
+            },
+
+            {
+              "type": "field_date",
+              "name": "DATE",
+              "date": "2023-07-15"
+          }
+        ],
+        "previousStatement": null,
+        "nextStatement": null,
+    };
+
+let loopBlock = {
+        "type": "loop_field",
+        "message0": "LOOP: %1",
+        "args0": [
+            {
+              "Text": "Time Period",
             }
         ],
         "previousStatement": null,
