@@ -81,7 +81,9 @@ let loopBlock = {
   "message0": "LOOP: %1",
   "args0": [
       {
-        "Text": "Time Period",
+        "type": "field_react_component",
+      "name": "FIELD",
+        "text": "Time Period",
       }
   ],
   "previousStatement": null,
