@@ -88,9 +88,9 @@ let loopBlock = {
   "nextStatement": null,
 };
 
-// Blockly.Blocks['test_loop_field'] = {
-//   init: function() {
-//     this.jsonInit(testLoopField);
-//     this.setStyle('loop_blocks');
-//   }
-// };
+Blockly.Blocks['test_loop_field'] = {
+  init: function() {
+    this.jsonInit(loopBlock);
+    this.setStyle('loop_blocks');
+  }
+};
