@@ -33,3 +33,7 @@ javascriptGenerator['test_react_field'] = function (block) {
 javascriptGenerator['test_react_date_field'] = function (block) {
     return 'console.log(' + block.getField('DATE').getText() + ');\n';
 };
+
+javascriptGenerator['test_loop_field'] = function (block){
+    return 'LOOP(\'Cycle\');\n';
+};

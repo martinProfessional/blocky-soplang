@@ -48,18 +48,6 @@ let reactDateField = {
         "nextStatement": null,
     };
 
-let loopBlock = {
-        "type": "loop_field",
-        "message0": "LOOP: %1",
-        "args0": [
-            {
-              "Text": "Time Period",
-            }
-        ],
-        "previousStatement": null,
-        "nextStatement": null,
-    };
-
 Blockly.Blocks['test_react_date_field'] = {
   init: function() {
     this.jsonInit(reactDateField);
@@ -87,3 +75,22 @@ Blockly.Blocks['test_react_field'] = {
     this.setStyle('loop_blocks');
   }
 };
+
+let loopBlock = {
+  "type": "test_loop_field",
+  "message0": "LOOP: %1",
+  "args0": [
+      {
+        "Text": "Time Period",
+      }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+};
+
+// Blockly.Blocks['test_loop_field'] = {
+//   init: function() {
+//     this.jsonInit(testLoopField);
+//     this.setStyle('loop_blocks');
+//   }
+// };
