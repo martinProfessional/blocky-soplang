@@ -85,15 +85,15 @@ let loopBlock = {
       "name": "TIMES",
       "value": 1,
       "min": 0,
-      "max": 60,
-      "precision": 1
+      "precision": 0.1
       },
       {
       "type": "field_dropdown",
       "name": "FIELDNAME",
       "options": [
         [ "SEC", "ITEM1" ],
-        [ "HOUR", "ITEM2" ]
+        ["MIN", "ITEM2"],
+        [ "HOUR", "ITEM3" ]
       ]
       }
   ],
