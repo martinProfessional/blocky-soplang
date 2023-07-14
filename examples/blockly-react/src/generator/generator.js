@@ -35,5 +35,5 @@ javascriptGenerator['test_react_date_field'] = function (block) {
 };
 
 javascriptGenerator['test_loop_field'] = function (block){
-    return 'LOOP(\'Cycle\');\n';
+    return 'LOOP('+block.getField('TIMES').getText()+' '+block.getField('FIELDNAME').getText()+');\n';
 };

@@ -78,14 +78,26 @@ Blockly.Blocks['test_react_field'] = {
 
 let loopBlock = {
   "type": "test_loop_field",
-  "message0": "LOOP: %1",
+  "message0": "LOOP: %1 %2",
   "args0": [
       {
-        "type": "field_react_component",
-      "name": "FIELD",
-        "text": "Time Period",
+      "type": "field_number",
+      "name": "TIMES",
+      "value": 1,
+      "min": 0,
+      "max": 60,
+      "precision": 1
+      },
+      {
+        "type": "field_dropdown",
+      "name": "FIELDNAME",
+      "options": [
+        [ "SEC", "ITEM1" ],
+        [ "HOUR", "ITEM2" ]
+      ]
       }
   ],
+  
   "previousStatement": null,
   "nextStatement": null,
 };
