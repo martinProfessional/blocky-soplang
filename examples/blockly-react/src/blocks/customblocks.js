@@ -89,7 +89,7 @@ let loopBlock = {
       "precision": 1
       },
       {
-        "type": "field_dropdown",
+      "type": "field_dropdown",
       "name": "FIELDNAME",
       "options": [
         [ "SEC", "ITEM1" ],
