@@ -118,15 +118,16 @@ let waitUntilBlock = {
   "type": "test_wait_until_field",
   "message0": "WAIT UNTIL: %1",
   "args0": [
-      {
-      "type": "field_number",
-      "name": "TIMES",
-      "value": 1,
-      "min": 0,
-      "precision": 0.1
-      },
+    {
+      "type": "input_value",
+      "name": "CONDITION",
+      "check": "Boolean"
+    }
   ],
-  
+  // "message1": "do %1",
+  // "args1": [
+  //   {"type": "input_statement", "name": "TF"}
+  // ],
   "previousStatement": null,
   "nextStatement": null,
 };
