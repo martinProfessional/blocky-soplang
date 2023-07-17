@@ -34,14 +34,12 @@ javascriptGenerator['test_react_date_field'] = function (block) {
     return 'console.log(' + block.getField('DATE').getText() + ');\n';
 };
 
-
 javascriptGenerator['test_loop_field'] = function (block){
-    // return 'LOOP('+block.getField('TIMES').getText()+' '+
-    // block.getField('FIELDNAME').getText()+')'+' {'+'\n}'+';\n';
-    // var sub_statement = block.getField('DO');
     var substring = javascriptGenerator.statementToCode(block, 'DO');
     return 'LOOP('+block.getField('TIMES').getText()+' '+ 
     block.getField('FIELDNAME').getText()+')'+' {\n'+ substring+'}'+';\n';
 };
 
-
+javascriptGenerator['test_wait_until_field'] = function (block){
+    return 'WAIT UNTIL('+' '+')'+';\n';
+};

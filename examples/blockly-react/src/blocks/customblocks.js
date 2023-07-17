@@ -113,3 +113,28 @@ Blockly.Blocks['test_loop_field'] = {
     this.setStyle('loop_blocks');
   }
 };
+
+let waitUntilBlock = {
+  "type": "test_wait_until_field",
+  "message0": "WAIT UNTIL: %1",
+  "args0": [
+      {
+      "type": "field_number",
+      "name": "TIMES",
+      "value": 1,
+      "min": 0,
+      "precision": 0.1
+      },
+  ],
+  
+  "previousStatement": null,
+  "nextStatement": null,
+};
+
+Blockly.Blocks['test_wait_until_field'] = {
+  init: function() {
+    this.jsonInit(waitUntilBlock);
+    this.setStyle('loop_blocks');
+  }
+};
+
