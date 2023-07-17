@@ -31,9 +31,9 @@ MusicMaker, a web app where you can program buttons to play different sounds, us
 
 ### What you'll need
 
--  A browser
--  A text editor
--  Basic knowledge of HTML, CSS and JavaScript
+- A browser
+- A text editor
+- Basic knowledge of HTML, CSS and JavaScript
 
 This codelab is focused on Blockly. The app structure, non-relevant concepts and code are glossed over and are provided for you to simply copy and paste.
 
@@ -54,10 +54,12 @@ git clone https://github.com/google/blockly-samples.git
 If you downloaded the source as a zip, unpacking it should give you a root folder named `blockly-samples-master`.
 
 The relevant files are in `examples/getting-started-codelab`. There are two versions of the app:
+
 - `starter-code/`: The starter code that you'll build upon in this codelab.
 - `complete-code/`: The code after completing the codelab, in case you get lost or want to compare to your version.
 
 Each folder contains:
+
 - `scripts/`
   - `main.js` - The main logic for the app. In the starter project it has all the code needed to navigate and switch between views in the basic app.
   - `music_maker.js` - A small library to play sounds. We will use it to actually play sounds in the browser.
@@ -87,7 +89,7 @@ You can go back to the play mode by tapping **SAVE** and then **DONE** buttons.
 
 Now that you know what you'll be building, you need to add Blockly dependencies to your app.
 
-Blockly releases are [published on npm](https://www.npmjs.com/package/blockly) on a quarterly basis. For this codelab you will import blockly using [unpkg](https://unpkg.com), which lets you import all of the files you need with a single script tag. 
+Blockly releases are [published on npm](https://www.npmjs.com/package/blockly) on a quarterly basis. For this codelab you will import blockly using [unpkg](https://unpkg.com), which lets you import all of the files you need with a single script tag.
 
 ### Add the script tag
 
@@ -98,7 +100,7 @@ Open `starter-code/index.html` in a text editor and scroll to the end. You can s
 <script src="scripts/main.js"></script>
 ```
 
-Add Blockly just before these two scripts. The order is important, because you will use Blockly objects later in `main.js`.  Your imports should now look like this:
+Add Blockly just before these two scripts. The order is important, because you will use Blockly objects later in `main.js`. Your imports should now look like this:
 
 ```html
 <script src="https://unpkg.com/blockly"></script>
@@ -109,6 +111,7 @@ Add Blockly just before these two scripts. The order is important, because you w
 ### Default imports
 
 Importing Blockly this way loads four default modules.
+
 - Blockly core: The main Blockly library, which defines the basic Blockly UI and logic.
 - Built-in block definitions: Common blocks such as loops, logic, math, and string manipulation.
 - The JavaScript generator: Converts blocks into JavaScript, and contains block generators for all built-in blocks.
@@ -127,6 +130,7 @@ In this section you will learn how to add a workspace to your app, including how
 ### Parts of Blockly
 
 A Blockly workspace has two main components:
+
 - The area where the user assembles their blocks (the white area).
 - A toolbox that contains all blocks that are available to the user (the grey area).
 
@@ -138,30 +142,29 @@ A toolbox is defined as a JavaScript object and passed into the workspace constr
 
 For more information on this JSON format and toolbox configuration, including category creation, please see our <a href="https://developers.google.com/blockly/guides/configure/web/toolbox">toolbox documentation</a>.
 
-
 ### Define the toolbox
 
 Open up `scripts/main.js` and scroll down to the end of the file. Then add the code for your `toolbox` definition just after the call to `enableMakerMode()`:
 
 ```js
 const toolbox = {
-  'kind': 'flyoutToolbox',
-  'contents': [
+  kind: "flyoutToolbox",
+  contents: [
     {
-      'kind': 'block',
-      'type': 'controls_repeat_ext',
-      'inputs': {
-        'TIMES': {
-          'shadow': {
-            'type': 'math_number',
-            'fields': {
-              'NUM': 5
-            }
-          }
-        }
-      }
-    }
-  ]
+      kind: "block",
+      type: "controls_repeat_ext",
+      inputs: {
+        TIMES: {
+          shadow: {
+            type: "math_number",
+            fields: {
+              NUM: 5,
+            },
+          },
+        },
+      },
+    },
+  ],
 };
 ```
 
@@ -169,9 +172,10 @@ This JavaScript object defines a toolbox with a single "repeat loop" block.
 
 ### Injection
 
-Adding a Blockly workspace to a page is called *injection*, because the workspace is injected into a `div` that already exists on the page.
+Adding a Blockly workspace to a page is called _injection_, because the workspace is injected into a `div` that already exists on the page.
 
 To do this you call the function `Blockly.inject(container, options)`, which takes two arguments:
+
 - `container` is where the Blockly workspace should be placed on the page. It can be an `Element`, an ID string, or a CSS selector.
 - `options` is a dictionary of configuration options.
 
@@ -186,7 +190,7 @@ For this codelab we will inject into a div with the id `"blocklyDiv"`, which you
 Now add code to inject the Blockly editor just afer the code you used to define your toolbox:
 
 ```js
-Blockly.inject('blocklyDiv', {
+Blockly.inject("blocklyDiv", {
   toolbox: toolbox,
   scrollbars: false,
   horizontalLayout: true,
@@ -217,7 +221,7 @@ Since this is a music maker app, we want a block that plays sounds. We could cre
 
 ![image](play_sound_block.png)
 
-In Blockly, a *block definition* describes how a block looks and behaves. This includes its text, colour, and shape. It may also include which other blocks it can connect to.
+In Blockly, a _block definition_ describes how a block looks and behaves. This includes its text, colour, and shape. It may also include which other blocks it can connect to.
 
 Blocks can be defined in either JavaScript or JSON. The developer site has a full article on [how to define a block](https://developers.google.com/blockly/guides/create-custom-blocks/define-blocks).
 
@@ -233,25 +237,25 @@ Create a JS file to define a new "play sound" block:
 ```js
 Blockly.common.defineBlocksWithJsonArray([
   {
-    "type": "play_sound",
-    "message0": "Play %1",
-    "args0": [
+    type: "play_sound",
+    message0: "Play %1",
+    args0: [
       {
-        "type": "field_dropdown",
-        "name": "VALUE",
-        "options": [
+        type: "field_dropdown",
+        name: "VALUE",
+        options: [
           ["C4", "sounds/c4.m4a"],
           ["D4", "sounds/d4.m4a"],
           ["E4", "sounds/e4.m4a"],
           ["F4", "sounds/f4.m4a"],
-          ["G4", "sounds/g4.m4a"]
-        ]
-      }
+          ["G4", "sounds/g4.m4a"],
+        ],
+      },
     ],
-    "previousStatement": null,
-    "nextStatement": null,
-    "colour": 355
-  }
+    previousStatement: null,
+    nextStatement: null,
+    colour: 355,
+  },
 ]);
 ```
 
@@ -261,7 +265,7 @@ Add a script tag to `index.html` to include your new block definition:
 <script src="scripts/sound_blocks.js"></script>
 ```
 
-Your sound block definitions must come after importing Blockly and before the other imports, since you will use Blockly functions in this file, and you will be using functions from this file in later files.  Your imports should now look like this:
+Your sound block definitions must come after importing Blockly and before the other imports, since you will use Blockly functions in this file, and you will be using functions from this file in later files. Your imports should now look like this:
 
 ```html
 <script src="https://unpkg.com/blockly"></script>
@@ -276,27 +280,27 @@ Now we can update the toolbox to include the new sound block, by adding `{'kind'
 
 ```js
 const toolbox = {
-  'kind': 'flyoutToolbox',
-  'contents': [
+  kind: "flyoutToolbox",
+  contents: [
     {
-      'kind': 'block',
-      'type': 'controls_repeat_ext',
-      'inputs': {
-        'TIMES': {
-          'shadow': {
-            'type': 'math_number',
-            'fields': {
-              'NUM': 5
-            }
-          }
-        }
-      }
+      kind: "block",
+      type: "controls_repeat_ext",
+      inputs: {
+        TIMES: {
+          shadow: {
+            type: "math_number",
+            fields: {
+              NUM: 5,
+            },
+          },
+        },
+      },
     },
     {
-      'kind': 'block',
-      'type': 'play_sound'
-    }
-  ]
+      kind: "block",
+      type: "play_sound",
+    },
+  ],
 };
 ```
 
@@ -320,7 +324,8 @@ Open `scripts/main.js`. Add the following code to the `save()` method:
 
 ```js
 button.blocklySave = Blockly.serialization.workspaces.save(
-    Blockly.getMainWorkspace());
+  Blockly.getMainWorkspace()
+);
 ```
 
 `workspaces.save` takes the Blockly workspace, exports its state to a JavaScript object and stores it in a `blocklySave` property on the button. This way the exported state for the block sequence gets associated with a particular button.
@@ -365,20 +370,20 @@ This generated code will be run by the browser, effectively executing the blocks
 
 Blockly can generate code from blocks for different languages, e.g. JavaScript, Python, or PHP.
 
-A *language generator* defines the rules for generating a specific language (such as indentation). Because we are using the default imports, we don't need to add any new code to get the JavaScript generator.
+A _language generator_ defines the rules for generating a specific language (such as indentation). Because we are using the default imports, we don't need to add any new code to get the JavaScript generator.
 
 As previously mentioned, you can define your imports more carefully to get a [different generator](https://www.npmjs.com/package/blockly#blockly-generators).
 
 ### Add a block generator
 
-When Blockly generates JavaScript code for blocks in a workspace, it translates each block into code. By default, it knows how to translate all library-provided default blocks into JavaScript code. However, for any custom blocks, we need to specify our own translation functions. These are called *block generators*.
+When Blockly generates JavaScript code for blocks in a workspace, it translates each block into code. By default, it knows how to translate all library-provided default blocks into JavaScript code. However, for any custom blocks, we need to specify our own translation functions. These are called _block generators_.
 
 Add the following code to the bottom of `scripts/sound_blocks.js`:
 
 ```js
-javascript.javascriptGenerator.forBlock['play_sound'] = function(block) {
-  let value = '\'' + block.getFieldValue('VALUE') + '\'';
-  return 'MusicMaker.queueSound(' + value + ');\n';
+javascript.javascriptGenerator.forBlock["play_sound"] = function (block) {
+  let value = "'" + block.getFieldValue("VALUE") + "'";
+  return "MusicMaker.queueSound(" + value + ");\n";
 };
 ```
 
@@ -389,7 +394,7 @@ With this translation function, the following `play_sound` block:
 translates into the JavaScript code:
 
 ```javascript
-MusicMaker.queueSound('Sounds/c4.m4a');
+MusicMaker.queueSound("Sounds/c4.m4a");
 ```
 
 For more information on generators, read the [generating code](https://developers.google.com/blockly/guides/create-custom-blocks/generating-code) page on the developer site.
@@ -409,8 +414,10 @@ Next, you need to generate the code out of that workspace, which you can do with
 The user's code will consist of many `MusicMaker.queueSound` calls. At the end of our generated script, add a call to `MusicMaker.play` to play all the sounds added to the queue:
 
 ```js
-let code = javascript.javascriptGenerator.workspaceToCode(Blockly.getMainWorkspace());
-code += 'MusicMaker.play();';
+let code = javascript.javascriptGenerator.workspaceToCode(
+  Blockly.getMainWorkspace()
+);
+code += "MusicMaker.play();";
 ```
 
 Finally, execute the script with the `eval` function. Wrap it in a `try/catch` so that any runtime errors are logged to the console, instead of failing quietly:
@@ -430,8 +437,10 @@ The end result should look like this:
 ```js
 function handlePlay(event) {
   loadWorkspace(event.target);
-  let code = javascript.javascriptGenerator.workspaceToCode(Blockly.getMainWorkspace());
-  code += 'MusicMaker.play();';
+  let code = javascript.javascriptGenerator.workspaceToCode(
+    Blockly.getMainWorkspace()
+  );
+  code += "MusicMaker.play();";
   try {
     eval(code);
   } catch (error) {
@@ -441,6 +450,7 @@ function handlePlay(event) {
 ```
 
 ### A note on eval
+
 Executing scripts with eval is not always the safest option - we use it here for simplicity. If you intend to run the user's blocks in production, check out the <a href="https://github.com/NeilFraser/JS-Interpreter">JS Interpreter project</a>. This project is separate from Blockly, but was specifically written for Blockly.
 
 ### Test it

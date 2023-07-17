@@ -37,13 +37,8 @@ javascriptGenerator['test_react_date_field'] = function (block) {
 javascriptGenerator['test_loop_field'] = function (block){
     var substring = javascriptGenerator.statementToCode(block, 'DO');
     return 'LOOP('+block.getField('TIMES').getText()+' '+ 
-    block.getField('FIELDNAME').getText()+')'+' {\n'+ substring+'}'+';\n';
+    block.getField('FIELDNAME').getText()+')'+' {\n'+ substring+'}'+'\n';
 };
-
-// javascriptGenerator['test_wait_until_field'] = function (block){
-//     var substring = javascriptGenerator.statementToCode(block, 'DO');
-//     return 'WAIT UNTIL('+''+')'+';\n';
-// };
 
 javascriptGenerator['test_wait_until_field'] = function (block) {
     var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
