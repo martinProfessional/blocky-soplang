@@ -24,7 +24,7 @@
 // More on generating code:
 // https://developers.google.com/blockly/guides/create-custom-blocks/generating-code
 
-import {javascriptGenerator} from 'blockly/javascript';
+import {javascriptGenerator, generator} from 'blockly/javascript';
 
 javascriptGenerator['test_react_field'] = function (block) {
     return 'console.log(\'custom block\');\n';
@@ -34,6 +34,14 @@ javascriptGenerator['test_react_date_field'] = function (block) {
     return 'console.log(' + block.getField('DATE').getText() + ');\n';
 };
 
+
 javascriptGenerator['test_loop_field'] = function (block){
-    return 'LOOP('+block.getField('TIMES').getText()+' '+block.getField('FIELDNAME').getText()+');\n';
+    // return 'LOOP('+block.getField('TIMES').getText()+' '+
+    // block.getField('FIELDNAME').getText()+')'+' {'+'\n}'+';\n';
+    // var sub_statement = block.getField('DO');
+    var substring = javascriptGenerator.statementToCode(block, 'DO');
+    return 'LOOP('+block.getField('TIMES').getText()+' '+ 
+    block.getField('FIELDNAME').getText()+')'+' {\n'+ substring+'}'+';\n';
 };
+
+

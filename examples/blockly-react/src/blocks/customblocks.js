@@ -91,11 +91,16 @@ let loopBlock = {
       "type": "field_dropdown",
       "name": "FIELDNAME",
       "options": [
-        [ "SEC", "ITEM1" ],
+        ["SEC", "ITEM1" ],
         ["MIN", "ITEM2"],
-        [ "HOUR", "ITEM3" ]
-      ]
+        ["HOUR", "ITEM3" ]
+      ],
+      // 'DO0': {'shadow': {'type': 'controls_if'}, 'block': undefined}
       }
+  ],
+  "message1": "do %1",
+  "args1": [
+    {"type": "input_statement", "name": "DO"}
   ],
   
   "previousStatement": null,
