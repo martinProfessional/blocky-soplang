@@ -55,6 +55,8 @@ function App(props) {
             <Block type="test_wait_until_field"/>
             <Block type="test_if_field"/>
             <Block type="test_else_field"/>
+            <Block type="test_else_if_field"/>
+
             <Block type="logic_compare" />
             <Block type="logic_operation" />
             {/* <Block type="controls_repeat_ext">

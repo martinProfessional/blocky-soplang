@@ -183,3 +183,31 @@ Blockly.Blocks['test_else_field'] = {
     this.setStyle('loop_blocks');
   }
 };
+
+let elseIfBlock = {
+  "type": "test_else_if_field",
+  "message0": "ELSE IF %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "CONDITION",
+      "check": "Boolean"
+    }
+  ],
+  "message1": "DO %1",
+  "args1": [
+    {
+      "type": "input_statement",
+      "name": "DO"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null
+};
+
+Blockly.Blocks['test_else_if_field'] = {
+  init: function() {
+    this.jsonInit(elseIfBlock);
+    this.setStyle('loop_blocks');
+  }
+};
