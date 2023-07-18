@@ -124,10 +124,6 @@ let waitUntilBlock = {
       "check": "Boolean"
     }
   ],
-  // "message1": "do %1",
-  // "args1": [
-  //   {"type": "input_statement", "name": "TF"}
-  // ],
   "previousStatement": null,
   "nextStatement": null,
 };
@@ -139,3 +135,51 @@ Blockly.Blocks['test_wait_until_field'] = {
   }
 };
 
+// let ifBlock = {
+//   "type": "test_if_field",
+//   "message0": "WAIT UNTIL: %1",
+//   "args0": [
+//     {
+//       "type": "input_value",
+//       "name": "CONDITION",
+//       "check": "Boolean"
+//     }
+//   ],
+//   "previousStatement": null,
+//   "nextStatement": null,
+// };
+
+// Blockly.Blocks['test_wait_until_field'] = {
+//   init: function() {
+//     this.jsonInit(waitUntilBlock);
+//     this.setStyle('loop_blocks');
+//   }
+// };
+
+let ifBlock = {
+  "type": "test_if_field",
+  "message0": "IF %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "CONDITION",
+      "check": "Boolean"
+    }
+  ],
+  "message1": "DO %1",
+  "args1": [
+    {
+      "type": "input_statement",
+      "name": "DO"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null
+};
+
+Blockly.Blocks['test_if_field'] = {
+  init: function() {
+    this.jsonInit(ifBlock);
+    this.setStyle('loop_blocks');
+  }
+};
