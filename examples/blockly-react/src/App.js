@@ -54,11 +54,13 @@ function App(props) {
             <Block type="test_loop_field"/>
             <Block type="test_wait_until_field"/>
             <Block type="test_if_field"/>
-            <Block type="test_else_field"/>
             <Block type="test_else_if_field"/>
-
+            <Block type="test_else_field"/>
+            
+            <Block type="logic_boolean" />
             <Block type="logic_compare" />
             <Block type="logic_operation" />
+            
             {/* <Block type="controls_repeat_ext">
               <Value name="TIMES">
                 <Shadow type="math_number">
@@ -68,7 +70,6 @@ function App(props) {
             </Block> */}
             {/* <Block type="logic_operation" />
             <Block type="logic_negate" /> */}
-            <Block type="logic_boolean" />
             {/* <Block type="logic_null" disabled="true" />
             <Block type="logic_ternary" />
             <Block type="text_charAt">
