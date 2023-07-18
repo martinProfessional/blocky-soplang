@@ -50,11 +50,11 @@ function App(props) {
       `}>
             {/* <Block type="test_react_field" />
             <Block type="test_react_date_field" /> */}
+            {/* <Block type="controls_ifelse" /> */}
             <Block type="test_loop_field"/>
             <Block type="test_wait_until_field"/>
             <Block type="test_if_field"/>
-            {/* <Block type="test_else_field"/> */}
-            <Block type="controls_ifelse" />
+            <Block type="test_else_field"/>
             <Block type="logic_compare" />
             <Block type="logic_operation" />
             {/* <Block type="controls_repeat_ext">
