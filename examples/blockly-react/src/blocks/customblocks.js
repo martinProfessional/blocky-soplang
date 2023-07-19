@@ -91,9 +91,11 @@ let loopBlock = {
       "type": "field_dropdown",
       "name": "FIELDNAME",
       "options": [
-        ["SEC", "ITEM1" ],
-        ["MIN", "ITEM2"],
-        ["HOUR", "ITEM3" ]
+        ["MSEC", "ITEM1" ],
+        ["SEC", "ITEM2" ],
+        ["MIN", "ITEM3"],
+        ["HOUR", "ITEM4" ],
+        ["DAY", "ITEM5" ]
       ],
       // 'DO0': {'shadow': {'type': 'controls_if'}, 'block': undefined}
       }
