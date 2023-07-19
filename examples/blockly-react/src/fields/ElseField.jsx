@@ -1,44 +1,44 @@
-import React from 'react';
-import * as Blockly from 'blockly/core';
+// import React from 'react';
+// import * as Blockly from 'blockly/core';
 
-import BlocklyReactField from './BlocklyReactField';
+// import BlocklyReactField from './BlocklyReactField';
 
-class ElseField extends BlocklyReactField {
-  static fromJson(options) {
-    return new this();
-  }
+// class ElseField extends BlocklyReactField {
+//   static fromJson(options) {
+//     return new this();
+//   }
 
-  getText_() {
-    return 'else';
-  }
+//   getText_() {
+//     return 'else';
+//   }
 
-  render() {
-    return (
-      <div>
-        <span>else</span>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div>
+//         <span>else</span>
+//       </div>
+//     );
+//   }
+// }
 
-Blockly.fieldRegistry.register('field_else', ElseField);
+// Blockly.fieldRegistry.register('field_else', ElseField);
 
-Blockly.Blocks['else_block'] = {
-  init: function () {
-    this.appendDummyInput().appendField(new Blockly.FieldElse(), 'ELSE');
-    this.appendStatementInput('DO').setCheck(null).appendField('do');
-    this.setColour(230);
-    this.setTooltip('');
-    this.setHelpUrl('');
-  },
-};
+// Blockly.Blocks['else_block'] = {
+//   init: function () {
+//     this.appendDummyInput().appendField(new Blockly.FieldElse(), 'ELSE');
+//     this.appendStatementInput('DO').setCheck(null).appendField('do');
+//     this.setColour(230);
+//     this.setTooltip('');
+//     this.setHelpUrl('');
+//   },
+// };
 
-Blockly.JavaScript['else_block'] = function (block) {
-  var doCode = Blockly.JavaScript.statementToCode(block, 'DO');
+// Blockly.JavaScript['else_block'] = function (block) {
+//   var doCode = Blockly.JavaScript.statementToCode(block, 'DO');
 
-  var code = 'else {\n' + doCode + '}\n';
+//   var code = 'else {\n' + doCode + '}\n';
 
-  return code;
-};
+//   return code;
+// };
 
-export default ElseField;
+// export default ElseField;
