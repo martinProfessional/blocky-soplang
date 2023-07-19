@@ -47,18 +47,23 @@ function App(props) {
 <xml xmlns="http://www.w3.org/1999/xhtml">
 </xml>
       `}>
-            {/* <Block type="test_react_field" />
-            <Block type="test_react_date_field" /> */}
-            {/* <Block type="controls_ifelse" /> */}
+
+            {/* <Block type="test_function_service_field"/>
+            <Block type="test_value_service_field"/> */}
+
             <Block type="test_loop_field"/>
             <Block type="test_wait_until_field"/>
             <Block type="test_if_field"/>
-            <Block type="test_else_if_field"/>
             <Block type="test_else_field"/>
             
             <Block type="logic_boolean" />
             <Block type="logic_compare" />
             <Block type="logic_operation" />
+
+            {/* <Block type="test_react_field" />
+            <Block type="test_react_date_field" /> */}
+            {/* <Block type="controls_ifelse" /> */}
+            {/* <Block type="test_else_if_field"/> */}
             
             {/* <Block type="controls_repeat_ext">
               <Value name="TIMES">
