@@ -46,7 +46,6 @@ javascriptGenerator['test_wait_until_field'] = function (block) {
     return 'WAIT UNTIL(' + conditionCode + ');\n';
   };
 
-
   javascriptGenerator['test_if_field'] = function (block) {
     var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
     var doCode = javascriptGenerator.statementToCode(block, 'DO');
@@ -66,4 +65,10 @@ javascriptGenerator['test_else_if_field'] = function (block) {
   var doCode = javascriptGenerator.statementToCode(block, 'DO');
   
   return 'ELSE IF (' + conditionCode + ') {\n' + doCode + '}\n';
+};
+
+javascriptGenerator['test_tag_field'] = function (block) {
+  var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+
+  return 'tag(' + conditionCode + ');\n';
 };

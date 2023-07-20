@@ -50,7 +50,8 @@ function App(props) {
 
             {/* <Block type="test_function_service_field"/>
             <Block type="test_value_service_field"/> */}
-
+            <Block type="test_tag_field"/>
+            
             <Block type="test_loop_field"/>
             <Block type="test_wait_until_field"/>
             <Block type="test_if_field"/>

@@ -213,3 +213,24 @@ Blockly.Blocks['test_else_if_field'] = {
     this.setStyle('loop_blocks');
   }
 };
+
+let tagBlock = {
+  "type": "test_tag_field",
+  "message0": "tag %1",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "CONDITION",
+      "check": "Boolean"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null
+};
+
+Blockly.Blocks['test_tag_field'] = {
+  init: function() {
+    this.jsonInit(tagBlock);
+    this.setStyle('loop_blocks');
+  }
+};
