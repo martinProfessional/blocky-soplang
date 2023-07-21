@@ -214,6 +214,10 @@ Blockly.Blocks['test_else_if_field'] = {
   }
 };
 
+
+
+
+
 let tagBlock = {
   "type": "test_tag_field",
   "message0": "tag %1",
@@ -234,3 +238,9 @@ Blockly.Blocks['test_tag_field'] = {
     this.setStyle('loop_blocks');
   }
 };
+
+
+// for f in functions {
+// 	let newFunctionServiceBlock = generateFunctionServiceBlock(f)
+// 	Blockly.Blocks['function_name']  = 	newFunctionServiceBlock
+// }
