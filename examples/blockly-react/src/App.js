@@ -32,11 +32,12 @@ import './generator/generator';
 import * as Blockly from "blockly/core";
 import {javascriptGenerator, generator} from 'blockly/javascript';
 
-var serviceList = [{'name': 'tag1', 'key':1}, {'name': 'tag2','key':2}, , {'name': 'tag3','key':3}]
+var serviceList = [{'name': 'tag1', 'key': 1}, {'name': 'tag2','key': 2}, {'name': 'tag3','key': 3}]
 
 const registerSoPBlocks = () => {
   for (const [key, value] of Object.entries(serviceList)) {
-    console.log("registerSoPBlocks: ",value);
+
+    // console.log("registerSoPBlocks: ",value);
 
     let sv1Block = {
       "type": `${value.name}`,
@@ -45,12 +46,28 @@ const registerSoPBlocks = () => {
         {
           "type": "input_value",
           "name": "CONDITION",
-          "check": "Boolean"
+          // "check": "String"
         }
       ],
+      "output": null,
       "previousStatement": null,
       "nextStatement": null
     };
+
+    // let sv1Block = {
+    //   "type": `${value.name}`,
+    //   "message0": `${value.name} %1`,
+    //   "args0": [
+    //     {
+    //       "type": "input_value",
+    //       "name": "CONDITION",
+    //       // "check": "String"
+    //     }
+    //   ],
+    //   "output": null,
+    //   "previousStatement": null,
+    //   "nextStatement": null
+    // };
     
     Blockly.Blocks[value.name] = {
       init: function() {
@@ -60,9 +77,21 @@ const registerSoPBlocks = () => {
     };
 
     javascriptGenerator[value.name] = function (block) {
-      var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
+
+      // var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
+
+      var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+      var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
+
+      if (block.previousStatement) {
+        return '#' + value.name;
+      } else {
+        return '(#' + value.name +' '+ conditionCode + ').\n';
+      }
+
+      // return '...' + ' someBlock ' + tagCode + '...';
       
-      return '(#' + value.name + ').\n';
+      // return '(#' + value.name + ' ' + conditionCode + ').\n';
     };
   }
 
@@ -77,7 +106,7 @@ const renderSoPBlocks = () => {
   // });
 
   for (const [key, value] of Object.entries(serviceList)) {
-    //console.log(key, value);
+    // console.log(key, value);
     toRender.push(<Block type={value.name}></Block>);
   }
   // console.log("test_tag_field");
@@ -123,9 +152,9 @@ function App(props) {
             <Block type="test_tag_field"/>
             
 
-            {/* <Block type="logic_boolean" />
+            <Block type="logic_boolean" />
             <Block type="logic_compare" />
-            <Block type="logic_operation" /> */}
+            <Block type="logic_operation" />
 
             {/* <Block type="test_react_field" />
             <Block type="test_react_date_field" /> */}
