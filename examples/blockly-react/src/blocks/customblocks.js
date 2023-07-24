@@ -217,7 +217,6 @@ Blockly.Blocks['test_else_if_field'] = {
 
 
 
-
 let tagBlock = {
   "type": "test_tag_field",
   "message0": "tag %1",

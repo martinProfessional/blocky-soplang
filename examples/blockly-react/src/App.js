@@ -23,15 +23,77 @@
 
 import React from 'react';
 import './App.css';
-
 import logo from './logo.svg';
-
 import BlocklyComponent, { Block, Value, Field, Shadow } from './Blockly';
-
 import './blocks/customblocks';
 import './generator/generator';
 
+
+import * as Blockly from "blockly/core";
+import {javascriptGenerator, generator} from 'blockly/javascript';
+
+var serviceList = [{'name': 'tag1', 'key':1}, {'name': 'tag2','key':2}, , {'name': 'tag3','key':3}]
+
+const registerSoPBlocks = () => {
+  for (const [key, value] of Object.entries(serviceList)) {
+    console.log("registerSoPBlocks: ",value);
+
+    let sv1Block = {
+      "type": `${value.name}`,
+      "message0": `${value.name} %1`,
+      "args0": [
+        {
+          "type": "input_value",
+          "name": "CONDITION",
+          "check": "Boolean"
+        }
+      ],
+      "previousStatement": null,
+      "nextStatement": null
+    };
+    
+    Blockly.Blocks[value.name] = {
+      init: function() {
+        this.jsonInit(sv1Block);
+        this.setStyle('loop_blocks');
+      }
+    };
+
+    javascriptGenerator[value.name] = function (block) {
+      var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
+      
+      return '(#' + value.name + ').\n';
+    };
+  }
+
+  return;
+};
+
+
+const renderSoPBlocks = () => {
+  var toRender = [];
+  // serviceList.forEach((k, ) => {
+  //   toRender.push(<Block type={f.name}></Block>);
+  // });
+
+  for (const [key, value] of Object.entries(serviceList)) {
+    //console.log(key, value);
+    toRender.push(<Block type={value.name}></Block>);
+  }
+  // console.log("test_tag_field");
+  // toRender.push(<Block type="sv1"/>)
+
+  // console.log(`render: ${toRender}`)
+
+  return toRender;
+};
+
+
+
 function App(props) {
+  
+    registerSoPBlocks();
+
     return (
       <div className="App">
         <header className="App-header">
@@ -51,54 +113,19 @@ function App(props) {
             {/* <Block type="test_function_service_field"/>
             <Block type="test_value_service_field"/> */}
             
+            {renderSoPBlocks()}
+
             <Block type="test_loop_field"/>
             <Block type="test_wait_until_field"/>
             <Block type="test_if_field"/>
             <Block type="test_else_field"/>
             
-            <Block type="logic_boolean" />
-            <Block type="logic_compare" />
-            <Block type="logic_operation" />
-            
-
-            
             <Block type="test_tag_field"/>
             
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            {/* <Block type="logic_boolean" />
+            <Block type="logic_compare" />
+            <Block type="logic_operation" /> */}
 
             {/* <Block type="test_react_field" />
             <Block type="test_react_date_field" /> */}
