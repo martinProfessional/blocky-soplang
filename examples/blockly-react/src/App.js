@@ -46,28 +46,13 @@ const registerSoPBlocks = () => {
         {
           "type": "input_value",
           "name": "CONDITION",
-          // "check": "String"
+          "check": "String"
         }
       ],
-      "output": null,
+      "output": "String",
       "previousStatement": null,
       "nextStatement": null
     };
-
-    // let sv1Block = {
-    //   "type": `${value.name}`,
-    //   "message0": `${value.name} %1`,
-    //   "args0": [
-    //     {
-    //       "type": "input_value",
-    //       "name": "CONDITION",
-    //       // "check": "String"
-    //     }
-    //   ],
-    //   "output": null,
-    //   "previousStatement": null,
-    //   "nextStatement": null
-    // };
     
     Blockly.Blocks[value.name] = {
       init: function() {
@@ -79,19 +64,16 @@ const registerSoPBlocks = () => {
     javascriptGenerator[value.name] = function (block) {
 
       // var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
-
+      //var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
       var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
-      var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
+      var order = javascriptGenerator.ORDER_ATOMIC
 
       if (block.previousStatement) {
-        return '#' + value.name;
+        return ['#' + value.name, null];
       } else {
-        return '(#' + value.name +' '+ conditionCode + ').\n';
+        return ['(#' + value.name +' '+ conditionCode + ').\n', null];
       }
 
-      // return '...' + ' someBlock ' + tagCode + '...';
-      
-      // return '(#' + value.name + ' ' + conditionCode + ').\n';
     };
   }
 
@@ -107,7 +89,7 @@ const renderSoPBlocks = () => {
 
   for (const [key, value] of Object.entries(serviceList)) {
     // console.log(key, value);
-    toRender.push(<Block type={value.name}></Block>);
+    toRender.push(<Block type={value.name}/>);
   }
   // console.log("test_tag_field");
   // toRender.push(<Block type="sv1"/>)

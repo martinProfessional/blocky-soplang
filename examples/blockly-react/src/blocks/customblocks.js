@@ -123,7 +123,7 @@ let waitUntilBlock = {
     {
       "type": "input_value",
       "name": "CONDITION",
-      "check": "Boolean"
+      //"check": "Boolean"
     }
   ],
   "previousStatement": null,
