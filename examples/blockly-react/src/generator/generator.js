@@ -68,13 +68,44 @@ javascriptGenerator['test_else_if_field'] = function (block) {
 };
 
 
-
-
-
-javascriptGenerator['test_tag_field'] = function (block) {
-  var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
-
-  return 'tag(' + conditionCode + ');\n';
+javascriptGenerator['test_tag_list_field'] = function (block) {
+  var conditionCode1 = javascriptGenerator.valueToCode(block, 'CONDITION1', javascriptGenerator.ORDER_NONE);
+  var conditionCode2 = javascriptGenerator.valueToCode(block, 'CONDITION2', javascriptGenerator.ORDER_NONE);
+  return '(' + conditionCode1 + ').'+conditionCode2;
 };
 
+
+
+// javascriptGenerator['test_tag_field'] = function (block) {
+//   var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+
+//   return 'tag(' + conditionCode + ');\n';
+// };
+
+
+
+
+
+// javascriptGenerator['test_space_field'] = function (block) {
+//   var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+//   var order = javascriptGenerator.ORDER_ATOMIC
+
+//   return [' '+ conditionCode, null];
+// };
+
+// javascriptGenerator['test_rb_field'] = function (block) {
+//   var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+//   var order = javascriptGenerator.ORDER_ATOMIC
+
+//   return ['('+ conditionCode, null];
+// };
+
+
+// javascriptGenerator['test_lb_field'] = function (block) {
+//   var conditionCode1 = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+//   var conditionCode2 = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+//   var order = javascriptGenerator.ORDER_ATOMIC
+
+//   return [")"+conditionCode1, null];
+// };
 

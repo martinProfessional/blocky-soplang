@@ -214,32 +214,147 @@ Blockly.Blocks['test_else_if_field'] = {
   }
 };
 
-
-
-
-let tagBlock = {
-  "type": "test_tag_field",
-  "message0": "tag %1",
+let tagListBlock = {
+  "type": "test_tag_list_field",
+  "message0": "tag list: %1",
   "args0": [
     {
       "type": "input_value",
-      "name": "CONDITION",
-      "check": "Boolean"
+      "name": "CONDITION1",
+      "check": "String",
+      "inputsInline": true
+    },
+  ],
+  "message1": "action/value: %1",
+  "args1": [
+    {
+      "type": "input_value",
+      "name": "CONDITION2",
+      "check": "String",
+      "inputsInline": false
     }
   ],
   "previousStatement": null,
   "nextStatement": null
 };
 
-Blockly.Blocks['test_tag_field'] = {
+// let tagListBlock = {
+//   "type": "test_tag_list_field",
+//   "message0": "tag list: %1 %2",
+//   "args0": [
+//     {
+//       "inputsInline": true,
+//       "type": "input_value",
+//       "name": "CONDITION1",
+//       "check": "Boolean"
+//     },
+//     {
+//       "type": "input_value",
+//       "name": "CONDITION2",
+//       "check": "Boolean",
+//       "inputsInline": false,
+//     }
+//   ],
+
+  
+//   "previousStatement": null,
+//   "nextStatement": null
+// };
+
+Blockly.Blocks['test_tag_list_field'] = {
   init: function() {
-    this.jsonInit(tagBlock);
+    this.jsonInit(tagListBlock);
     this.setStyle('loop_blocks');
   }
 };
 
 
-// for f in functions {
-// 	let newFunctionServiceBlock = generateFunctionServiceBlock(f)
-// 	Blockly.Blocks['function_name']  = 	newFunctionServiceBlock
-// }
+
+// let tagBlock = {
+//   "type": "test_tag_field",
+//   "message0": "tag %1",
+//   "args0": [
+//     {
+//       "type": "input_value",
+//       "name": "CONDITION",
+//       "check": "Boolean"
+//     }
+//   ],
+//   "previousStatement": null,
+//   "nextStatement": null
+// };
+
+// Blockly.Blocks['test_tag_field'] = {
+//   init: function() {
+//     this.jsonInit(tagBlock);
+//     this.setStyle('loop_blocks');
+//   }
+// };
+
+
+
+// let spaceBlock = {
+//   "type": "test_space_field",
+//   "message0": " %1",
+//   "args0": [
+//     {
+//       "type": "input_value",
+//       "name": "CONDITION",
+//       "check": "String"
+//     }
+//   ],
+//   "output": "String",
+//   "previousStatement": null,
+//   "nextStatement": null
+// };
+
+// Blockly.Blocks['test_space_field'] = {
+//   init: function() {
+//     this.jsonInit(spaceBlock);
+//     this.setStyle('loop_blocks');
+//   }
+// };
+
+// let rbBlock = {
+//   "type": "test_rb_field",
+//   "message0": "( %1",
+//   "args0": [
+//     {
+//       "type": "input_value",
+//       "name": "CONDITION",
+//       "check": "String"
+//     }
+//   ],
+//   "output": "String",
+//   "previousStatement": null,
+//   "nextStatement": null
+// };
+
+// Blockly.Blocks['test_rb_field'] = {
+//   init: function() {
+//     this.jsonInit(rbBlock);
+//     this.setStyle('loop_blocks');
+//   }
+// };
+
+// let lbBlock = {
+//   "type": "test_lb_field",
+//   "message0": ") %1",
+//   "args0": [
+//     {
+//       "type": "input_value",
+//       "name": "CONDITION",
+//       "check": "String"
+//     }
+//   ],
+//   "output": "String",
+//   "previousStatement": null,
+//   "nextStatement": null
+// };
+
+// Blockly.Blocks['test_lb_field'] = {
+//   init: function() {
+//     this.jsonInit(lbBlock);
+//     this.setStyle('loop_blocks');
+//   }
+// };

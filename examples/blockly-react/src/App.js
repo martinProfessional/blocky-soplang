@@ -68,11 +68,24 @@ const registerSoPBlocks = () => {
       var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
       var order = javascriptGenerator.ORDER_ATOMIC
 
-      if (block.previousStatement) {
-        return ['#' + value.name, null];
-      } else {
-        return ['(#' + value.name +' '+ conditionCode + ').\n', null];
-      }
+      return [' #' + value.name+ conditionCode, null];
+
+      //   if () {
+      //     if(){
+      //       return ['(#' + value.name +' '+ conditionCode + ').\n', null];
+      //     } else {
+      //       return ['#' + value.name, null];
+      //     }
+      //   } else {
+      //     return ['(#' + value.name + ').'+ conditionCode +'\n', null];
+  
+      // };
+
+      // if (block.ORDER_ATOMIC<0) {
+      //   return ['#' + value.name, null];
+      // } else {
+      //   return ['(#' + value.name +' '+ conditionCode + ').\n', null];
+      // }
 
     };
   }
@@ -131,12 +144,19 @@ function App(props) {
             <Block type="test_if_field"/>
             <Block type="test_else_field"/>
             
-            <Block type="test_tag_field"/>
+            {/* <Block type="test_tag_field"/> */}
+
+            {/* <Block type="test_space_field"/>
+            <Block type="test_rb_field"/>
+            <Block type="test_lb_field"/> */}
+
             
+            <Block type="test_tag_list_field"/>
 
             <Block type="logic_boolean" />
             <Block type="logic_compare" />
             <Block type="logic_operation" />
+
 
             {/* <Block type="test_react_field" />
             <Block type="test_react_date_field" /> */}
