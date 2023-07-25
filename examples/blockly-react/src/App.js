@@ -63,29 +63,10 @@ const registerSoPBlocks = () => {
 
     javascriptGenerator[value.name] = function (block) {
 
-      // var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
-      //var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
       var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
       var order = javascriptGenerator.ORDER_ATOMIC
 
       return [' #' + value.name+ conditionCode, null];
-
-      //   if () {
-      //     if(){
-      //       return ['(#' + value.name +' '+ conditionCode + ').\n', null];
-      //     } else {
-      //       return ['#' + value.name, null];
-      //     }
-      //   } else {
-      //     return ['(#' + value.name + ').'+ conditionCode +'\n', null];
-  
-      // };
-
-      // if (block.ORDER_ATOMIC<0) {
-      //   return ['#' + value.name, null];
-      // } else {
-      //   return ['(#' + value.name +' '+ conditionCode + ').\n', null];
-      // }
 
     };
   }
@@ -93,26 +74,14 @@ const registerSoPBlocks = () => {
   return;
 };
 
-
 const renderSoPBlocks = () => {
   var toRender = [];
-  // serviceList.forEach((k, ) => {
-  //   toRender.push(<Block type={f.name}></Block>);
-  // });
 
   for (const [key, value] of Object.entries(serviceList)) {
-    // console.log(key, value);
     toRender.push(<Block type={value.name}/>);
   }
-  // console.log("test_tag_field");
-  // toRender.push(<Block type="sv1"/>)
-
-  // console.log(`render: ${toRender}`)
-
   return toRender;
 };
-
-
 
 function App(props) {
   
