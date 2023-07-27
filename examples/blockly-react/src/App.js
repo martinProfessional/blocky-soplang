@@ -32,10 +32,17 @@ import './generator/generator';
 import * as Blockly from "blockly/core";
 import {javascriptGenerator, generator} from 'blockly/javascript';
 
-var serviceList = [{'name': 'tag1', 'key': 1}, {'name': 'tag2','key': 2}, {'name': 'tag3','key': 3}]
+// var serviceList = [{'name': 'tag1', 'key': 1}, {'name': 'tag2','key': 2}, {'name': 'tag3','key': 3}]
+var tagDB = [{'name': 'tag1'}, {'name': 'tag2'}, {'name': 'tag3'}];
+var functionDB = [{'name': 'turn_off', 'return_type': "void", 'use_arg': 0},
+                {'name': 'capture', 'return_type': "binary", 'use_arg': 0},
+                {'name': 'capture_with_timeout', 'return_type':"binary", 'use_arg': 1, 
+                'arguments':[{'type':"int", 'name': "TIME", 'bound':{"min_value":1,"max_value":100}}]}];
+
+
 
 const registerSoPBlocks = () => {
-  for (const [key, value] of Object.entries(serviceList)) {
+  for (const [key, value] of Object.entries(tagDB)) {
 
     // console.log("registerSoPBlocks: ",value);
 
@@ -71,14 +78,71 @@ const registerSoPBlocks = () => {
     };
   }
 
+  // for (const [key, value] of Object.entries(functionDB)) {
+  //   var argsList = ""
+  //   var argsPara = ""
+  //   // for i in length(arguments):
+  //   //   argsString += " %" + str(i) 
+  //   if(value.use_arg){
+  //     for(let i=0; i<value.arguments.length; i++){
+  //       argsList += " %" + (i+1);
+
+  //       argsPara += "\"args"+i+"\": [\n"+value.arguments[i]+"\n]\n"
+  //     }
+
+
+  //   }
+  //   //   let type_field_refer_map = {"int": "field_number"};
+
+  // // var args =[]
+  //   // for arg in arguments:
+  //   //     var arg = {"type": type_field_refer_map[arg.type], "name": arg.name, }
+  //   //     args.append(arg)
+  //   // let sv2Block = {
+  //   //   "type": `${value.name}`,
+  //   //   //"message0": `${value.name} ${args}`,
+  //   //   "message0": `${value.name} ${argsList}`,
+
+  //   //   // "args0": [
+        
+  //   //   //   //${args}
+  //   //   // ],
+  //   //   //`${argsPara}`,
+  //   //   "output": "String",
+  //   //   "previousStatement": null,
+  //   //   "nextStatement": null
+  //   // };
+    
+  //   // Blockly.Blocks[value.name] = {
+  //   //   init: function() {
+  //   //     this.jsonInit(sv2Block);
+  //   //     this.setStyle('loop_blocks');
+  //   //   }
+  //   // };
+
+  //   javascriptGenerator[value.name] = function (block) {
+
+  //     var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
+  //     var order = javascriptGenerator.ORDER_ATOMIC
+
+  //     return [' #' + value.name+ conditionCode, null];
+
+  //   };
+
+  // }
+
   return;
 };
 
 const renderSoPBlocks = () => {
   var toRender = [];
 
-  for (const [key, value] of Object.entries(serviceList)) {
+  for (const [key, value] of Object.entries(tagDB)) {
     toRender.push(<Block type={value.name}/>);
+  }
+
+  for (const [key, value] of Object.entries(functionDB)) {
+    toRender. push(<Block type={value.name}/>);
   }
   return toRender;
 };
