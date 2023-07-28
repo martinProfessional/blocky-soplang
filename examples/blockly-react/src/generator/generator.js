@@ -24,67 +24,86 @@
 // More on generating code:
 // https://developers.google.com/blockly/guides/create-custom-blocks/generating-code
 
-import {javascriptGenerator, generator} from 'blockly/javascript';
+import { javascriptGenerator, generator } from "blockly/javascript";
 
-javascriptGenerator['test_react_field'] = function (block) {
-    return 'console.log(\'custom block\');\n';
+javascriptGenerator["test_react_field"] = function (block) {
+  return "console.log('custom block');\n";
 };
 
-javascriptGenerator['test_react_date_field'] = function (block) {
-    return 'console.log(' + block.getField('DATE').getText() + ');\n';
+javascriptGenerator["test_react_date_field"] = function (block) {
+  return "console.log(" + block.getField("DATE").getText() + ");\n";
 };
 
-javascriptGenerator['test_loop_field'] = function (block){
-    var substring = javascriptGenerator.statementToCode(block, 'DO');
-    return 'LOOP('+block.getField('TIMES').getText()+' '+ 
-    block.getField('FIELDNAME').getText()+')'+' {\n'+ substring+'}'+'\n';
+javascriptGenerator["test_loop_field"] = function (block) {
+  var substring = javascriptGenerator.statementToCode(block, "DO");
+  return (
+    "LOOP(" +
+    block.getField("TIMES").getText() +
+    " " +
+    block.getField("FIELDNAME").getText() +
+    ")" +
+    " {\n" +
+    substring +
+    "}" +
+    "\n"
+  );
 };
 
-javascriptGenerator['test_wait_until_field'] = function (block) {
-    var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
-  
-    return 'WAIT UNTIL(' + conditionCode + ');\n';
-  };
+javascriptGenerator["test_wait_until_field"] = function (block) {
+  var conditionCode = javascriptGenerator.valueToCode(
+    block,
+    "CONDITION",
+    javascriptGenerator.ORDER_NONE
+  );
 
-  javascriptGenerator['test_if_field'] = function (block) {
-    var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
-    var doCode = javascriptGenerator.statementToCode(block, 'DO');
-    
-    return 'IF (' + conditionCode + ') {\n' + doCode + '}\n';
-  };
-
-  javascriptGenerator['test_else_field'] = function (block) {
-    var doCode = javascriptGenerator.statementToCode(block, 'DO');
-  
-    return 'ELSE {\n' + doCode + '}\n';
-  };
-
-
-javascriptGenerator['test_else_if_field'] = function (block) {
-  var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
-  var doCode = javascriptGenerator.statementToCode(block, 'DO');
-  
-  return 'ELSE IF (' + conditionCode + ') {\n' + doCode + '}\n';
+  return "WAIT UNTIL(" + conditionCode + ");\n";
 };
 
+javascriptGenerator["test_if_field"] = function (block) {
+  var conditionCode = javascriptGenerator.valueToCode(
+    block,
+    "CONDITION",
+    javascriptGenerator.ORDER_NONE
+  );
+  var doCode = javascriptGenerator.statementToCode(block, "DO");
 
-javascriptGenerator['test_tag_list_field'] = function (block) {
-  var conditionCode1 = javascriptGenerator.valueToCode(block, 'CONDITION1', javascriptGenerator.ORDER_NONE);
-  var conditionCode2 = javascriptGenerator.valueToCode(block, 'CONDITION2', javascriptGenerator.ORDER_NONE);
-  return '(' + conditionCode1 + ').'+conditionCode2;
+  return "IF (" + conditionCode + ") {\n" + doCode + "}\n";
 };
 
+javascriptGenerator["test_else_field"] = function (block) {
+  var doCode = javascriptGenerator.statementToCode(block, "DO");
 
+  return "ELSE {\n" + doCode + "}\n";
+};
+
+javascriptGenerator["test_else_if_field"] = function (block) {
+  var conditionCode = javascriptGenerator.valueToCode(
+    block,
+    "CONDITION",
+    javascriptGenerator.ORDER_NONE
+  );
+  var doCode = javascriptGenerator.statementToCode(block, "DO");
+
+  return "ELSE IF (" + conditionCode + ") {\n" + doCode + "}\n";
+};
+
+javascriptGenerator["test_tag_list_field"] = function (block) {
+  var conditionCode1 = javascriptGenerator
+    .valueToCode(block, "CONDITION1", javascriptGenerator.ORDER_NONE)
+    .trim();
+  var conditionCode2 = javascriptGenerator.valueToCode(
+    block,
+    "CONDITION2",
+    javascriptGenerator.ORDER_NONE
+  );
+  return ["(" + conditionCode1 + ")." + conditionCode2, null];
+};
 
 // javascriptGenerator['test_tag_field'] = function (block) {
 //   var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
 
 //   return 'tag(' + conditionCode + ');\n';
 // };
-
-
-
-
 
 // javascriptGenerator['test_space_field'] = function (block) {
 //   var conditionCode = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
@@ -100,7 +119,6 @@ javascriptGenerator['test_tag_list_field'] = function (block) {
 //   return ['('+ conditionCode, null];
 // };
 
-
 // javascriptGenerator['test_lb_field'] = function (block) {
 //   var conditionCode1 = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
 //   var conditionCode2 = javascriptGenerator.valueToCode(block, 'CONDITION', javascriptGenerator.ORDER_NONE);
@@ -108,4 +126,3 @@ javascriptGenerator['test_tag_list_field'] = function (block) {
 
 //   return [")"+conditionCode1, null];
 // };
-
