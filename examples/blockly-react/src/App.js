@@ -164,38 +164,65 @@ const registerTagBlocks = (tagList) => {
   return;
 };
 
+// const renderArgumentsMessage = (args) => {
+//   var argMessage = "";
+//   var idx = 1;
+//   for (const [key, value] of Object.entries(args)) {
+//     if (args.length == idx) {
+//       argMessage += `%${idx}`;
+//     } else {
+//       argMessage += `%${idx}, `;
+//     }
+//     idx += 1;
+
+//     console.log("idx: ", idx);
+//     console.log("argMessage: ", argMessage);
+//   }
+
+//   return argMessage;
+// };
+
 const renderArgumentsMessage = (args) => {
   var argMessage = "";
   var idx = 1;
-  for (const [key, value] of Object.entries(args)) {
-    if (args.length == idx) {
+  for (const arg of args) {
+    if (args.length === idx) {
       argMessage += `%${idx}`;
     } else {
       argMessage += `%${idx}, `;
     }
     idx += 1;
-
-    console.log("idx: ", idx);
-    console.log("argMessage: ", argMessage);
   }
-
   return argMessage;
 };
 
+// const renderArgumentsArgs0 = (args) => {
+//   var argList = [];
+
+//   var idx1 = 1;
+//   for (const [key, value] of Object.entries(args)) {
+//     argList.push({
+//       type: "input_value",
+//       name: `ARG%${idx1}`,
+//       check: "String",
+//     });
+//     idx1 += 1;
+//   }
+
+//   return argList;
+// };
+
 const renderArgumentsArgs0 = (args) => {
   var argList = [];
-
   var idx1 = 1;
-  for (const [key, value] of Object.entries(args)) {
+  for (const arg of args) {
     argList.push({
       type: "input_value",
-      //name: `ARG%${idx1}`,
-      name: "HAP",
+      name: `ARG${idx1}`,
       check: "String",
     });
     idx1 += 1;
   }
-
   return argList;
 };
 
@@ -217,16 +244,32 @@ const registerFunctionBlocks = (functionList) => {
 
     //for (let i = 1; i <= argList.length; i++) {}
 
-    javascriptGenerator[value.name] = function (block) {
-      // var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
-      //var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
-      var conditionCode = javascriptGenerator.valueToCode(
-        block,
-        "HAP",
-        javascriptGenerator.ORDER_NONE
-      );
+    // javascriptGenerator[value.name] = function (block) {
+    //   // var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
+    //   //var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
+    //   var conditionCode = javascriptGenerator.valueToCode(
+    //     block,
+    //     "HAP",
+    //     javascriptGenerator.ORDER_NONE
+    //   );
 
-      return [value.name + "(" + conditionCode + ")", null];
+    //   return [value.name + "(" + conditionCode + ")", null];
+    // };
+
+    javascriptGenerator[value.name] = function (block) {
+      var argCodeList = [];
+      for (let i = 1; i <= value.arguments.length; i++) {
+        var argCode = javascriptGenerator.valueToCode(
+          block,
+          `ARG${i}`,
+          javascriptGenerator.ORDER_NONE
+        );
+        argCodeList.push(argCode);
+      }
+
+      var conditionCode = argCodeList.join(", ");
+
+      return [`${value.name}(${conditionCode})`, null];
     };
   }
 
