@@ -87,6 +87,18 @@ javascriptGenerator["test_else_if_field"] = function (block) {
   return "ELSE IF (" + conditionCode + ") {\n" + doCode + "}\n";
 };
 
+// javascriptGenerator["test_tag_list_field"] = function (block) {
+//   var conditionCode1 = javascriptGenerator
+//     .valueToCode(block, "CONDITION1", javascriptGenerator.ORDER_NONE)
+//     .trim();
+//   var conditionCode2 = javascriptGenerator.valueToCode(
+//     block,
+//     "CONDITION2",
+//     javascriptGenerator.ORDER_NONE
+//   );
+//   return ["(" + conditionCode1 + ")." + conditionCode2, null];
+// };
+
 javascriptGenerator["test_tag_list_field"] = function (block) {
   var conditionCode1 = javascriptGenerator
     .valueToCode(block, "CONDITION1", javascriptGenerator.ORDER_NONE)
@@ -96,7 +108,22 @@ javascriptGenerator["test_tag_list_field"] = function (block) {
     "CONDITION2",
     javascriptGenerator.ORDER_NONE
   );
-  return ["(" + conditionCode1 + ")." + conditionCode2, null];
+  return "(" + conditionCode1 + ")." + conditionCode2;
+};
+
+javascriptGenerator["test_compare_field"] = function (block) {
+  var assigneeCode = javascriptGenerator.valueToCode(
+    block,
+    "ASSIGNEE",
+    javascriptGenerator.ORDER_NONE
+  );
+  var valCode = javascriptGenerator.valueToCode(
+    block,
+    "VAL",
+    javascriptGenerator.ORDER_NONE
+  );
+
+  return [assigneeCode + block.getField("HOWCOMP").getText() + valCode, null];
 };
 
 // javascriptGenerator['test_tag_field'] = function (block) {

@@ -75,6 +75,44 @@ Blockly.Blocks["test_react_field"] = {
   },
 };
 
+let compareBlock = {
+  type: "test_compare_field",
+  message0: "%1 %2 %3",
+  args0: [
+    {
+      type: "input_value",
+      name: "ASSIGNEE",
+      check: "String",
+    },
+    {
+      type: "field_dropdown",
+      name: "HOWCOMP",
+      options: [
+        ["==", "ITEM1"],
+        ["<=", "ITEM2"],
+        [">=", "ITEM3"],
+        ["<", "ITEM4"],
+        [">", "ITEM5"],
+      ],
+    },
+    {
+      type: "input_value",
+      name: "VAL",
+      check: "String",
+    },
+  ],
+  inputsInline: !0,
+  output: "String",
+  colour: 38.8,
+};
+
+Blockly.Blocks["test_compare_field"] = {
+  init: function () {
+    this.jsonInit(compareBlock);
+    //this.setStyle("loop_blocks");
+  },
+};
+
 let loopBlock = {
   type: "test_loop_field",
   message0: "LOOP: %1 %2",
@@ -100,7 +138,7 @@ let loopBlock = {
     },
   ],
   message1: "do %1",
-  args1: [{ type: "input_statement", name: "DO" }],
+  args1: [{ type: "input_statement", name: "DO", check: "String" }],
 
   previousStatement: null,
   nextStatement: null,
@@ -141,7 +179,7 @@ let ifBlock = {
     {
       type: "input_value",
       name: "CONDITION",
-      check: "Boolean",
+      check: "String",
     },
   ],
   message1: "DO %1",
@@ -234,6 +272,14 @@ let tagListBlock = {
 
   previousStatement: null,
   nextStatement: null,
+  colour: 38.8,
+};
+
+Blockly.Blocks["test_tag_list_field"] = {
+  init: function () {
+    this.jsonInit(tagListBlock);
+    //this.setStyle("loop_blocks");
+  },
 };
 
 // let tagListBlock = {
@@ -257,13 +303,6 @@ let tagListBlock = {
 //   "previousStatement": null,
 //   "nextStatement": null
 // };
-
-Blockly.Blocks["test_tag_list_field"] = {
-  init: function () {
-    this.jsonInit(tagListBlock);
-    this.setStyle("loop_blocks");
-  },
-};
 
 // let tagBlock = {
 //   "type": "test_tag_field",

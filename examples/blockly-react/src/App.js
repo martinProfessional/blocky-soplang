@@ -20,7 +20,6 @@
  * @fileoverview Main React component that includes the Blockly component.
  * @author samelh@google.com (Sam El-Husseini)
  */
-
 import React from "react";
 import "./App.css";
 import logo from "./logo.svg";
@@ -32,20 +31,95 @@ import * as Blockly from "blockly/core";
 import { javascriptGenerator, generator } from "blockly/javascript";
 
 var functionList = [
-  { name: "f1", use_arg: 0, arguments: [] },
-  { name: "f2", use_arg: 1, arguments: [{ name: "arg1" }] },
+  { name: "get_news", use_arg: 0, arguments: [] },
+  { name: "get_weather", use_arg: 0, arguments: [] },
+  { name: "get_time", use_arg: 0, arguments: [] },
+  { name: "turn_on", use_arg: 0, arguments: [] },
+  { name: "turn_off", use_arg: 0, arguments: [] },
+  { name: "turn_on", use_arg: 0, arguments: [] },
+  { name: "start_cleaning", use_arg: 0, arguments: [] },
+  { name: "stop_cleaning", use_arg: 0, arguments: [] },
+  { name: "alarm", use_arg: 0, arguments: [] },
+  { name: "take_picture", use_arg: 1, arguments: [{ name: "arg1" }] },
+  { name: "speak", use_arg: 1, arguments: [{ name: "arg1" }] },
   {
-    name: "f3",
+    name: "set_temperature",
+    use_arg: 1,
+    arguments: [{ name: "arg2-1" }, { name: "arg2-2" }],
+  },
+  {
+    name: "set_humidity",
+    use_arg: 1,
+    arguments: [{ name: "arg2-1" }, { name: "arg2-2" }],
+  },
+  {
+    name: "send_mail",
     use_arg: 1,
     arguments: [{ name: "arg2-1" }, { name: "arg2-2" }],
   },
 ];
 
 var tagList = [
-  { name: "tag1", key: 1 },
-  { name: "tag2", key: 2 },
-  { name: "tag3", key: 3 },
+  { name: "vaccum_robot" },
+  { name: "news" },
+  { name: "humidifier" },
+  { name: "speaker" },
+  { name: "camera" },
+  { name: "TV" },
+  { name: "meering_room" },
+  { name: "clock" },
+  { name: "light" },
+  { name: "office" },
+  { name: "door" },
+  { name: "air_conditioner" },
+  { name: "living_room" },
+  { name: "movement" },
+  { name: "email" },
+  { name: "induction_stove" },
+  { name: "printer" },
+  { name: "microwave" },
+  { name: "oven" },
+  { name: "computer" },
+  { name: "air_cleaner" },
+  { name: "thermostat" },
 ];
+
+var valList = [
+  { name: "detected" },
+  { name: "humidity" },
+  { name: "HOUR" },
+  { name: "temperature" },
+  { name: "dust" },
+  { name: "brightness" },
+  { name: "MINUTE" },
+  { name: "number_of_people" },
+  { name: "mood" },
+  { name: "DATE" },
+];
+
+const registerValBlocks = (valList) => {
+  for (const [key, value] of Object.entries(valList)) {
+    let valBlock = {
+      type: `${value.name}`,
+      message0: `${value.name}`,
+      output: "String",
+      colour: 190,
+    };
+
+    Blockly.Blocks[value.name] = {
+      init: function () {
+        this.jsonInit(valBlock);
+        //this.setStyle("loop_blocks");
+      },
+    };
+
+    javascriptGenerator[value.name] = function (block) {
+      return [value.name, null];
+    };
+  }
+
+  return;
+};
 
 const registerVariableBlock = () => {
   let variableBlock = {
@@ -61,25 +135,17 @@ const registerVariableBlock = () => {
     ],
     inputsInline: !0,
     output: "String",
+    colour: 38.8,
   };
 
   Blockly.Blocks["my_variable"] = {
     init: function () {
       this.jsonInit(variableBlock);
-      this.setStyle("loop_blocks");
+      //this.setStyle("loop_blocks");
     },
   };
 
   javascriptGenerator["my_variable"] = function (block) {
-    // var variableCode = javascriptGenerator.valueToCode(
-    //   block,
-    //   "VARIABLE",
-    //   javascriptGenerator.ORDER_NONE
-    // );
-
-    // console.log("variableCode");
-    // console.log(variableCode);
-
     return [block.getField("VARIABLE").getText(), null];
   };
 };
@@ -101,12 +167,13 @@ const registerAssignBlock = () => {
     ],
     inputsInline: !0,
     output: "String",
+    colour: 38.8,
   };
 
   Blockly.Blocks["assign"] = {
     init: function () {
       this.jsonInit(assignBlock);
-      this.setStyle("loop_blocks");
+      //this.setStyle("loop_blocks");
     },
   };
 
@@ -139,18 +206,17 @@ const registerTagBlocks = (tagList) => {
         },
       ],
       output: "String",
+      colour: 310,
     };
 
     Blockly.Blocks[value.name] = {
       init: function () {
         this.jsonInit(tagBlock);
-        this.setStyle("loop_blocks");
+        //this.setStyle("loop_blocks");
       },
     };
 
     javascriptGenerator[value.name] = function (block) {
-      // var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
-      //var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
       var conditionCode = javascriptGenerator.valueToCode(
         block,
         "TAG",
@@ -163,24 +229,6 @@ const registerTagBlocks = (tagList) => {
 
   return;
 };
-
-// const renderArgumentsMessage = (args) => {
-//   var argMessage = "";
-//   var idx = 1;
-//   for (const [key, value] of Object.entries(args)) {
-//     if (args.length == idx) {
-//       argMessage += `%${idx}`;
-//     } else {
-//       argMessage += `%${idx}, `;
-//     }
-//     idx += 1;
-
-//     console.log("idx: ", idx);
-//     console.log("argMessage: ", argMessage);
-//   }
-
-//   return argMessage;
-// };
 
 const renderArgumentsMessage = (args) => {
   var argMessage = "";
@@ -195,22 +243,6 @@ const renderArgumentsMessage = (args) => {
   }
   return argMessage;
 };
-
-// const renderArgumentsArgs0 = (args) => {
-//   var argList = [];
-
-//   var idx1 = 1;
-//   for (const [key, value] of Object.entries(args)) {
-//     argList.push({
-//       type: "input_value",
-//       name: `ARG%${idx1}`,
-//       check: "String",
-//     });
-//     idx1 += 1;
-//   }
-
-//   return argList;
-// };
 
 const renderArgumentsArgs0 = (args) => {
   var argList = [];
@@ -233,28 +265,15 @@ const registerFunctionBlocks = (functionList) => {
       message0: `${value.name} ( ${renderArgumentsMessage(value.arguments)} )`,
       args0: renderArgumentsArgs0(value.arguments),
       output: "String",
+      colour: 260,
     };
 
     Blockly.Blocks[value.name] = {
       init: function () {
         this.jsonInit(functionBlock);
-        this.setStyle("loop_blocks");
+        //this.setStyle("loop_blocks");
       },
     };
-
-    //for (let i = 1; i <= argList.length; i++) {}
-
-    // javascriptGenerator[value.name] = function (block) {
-    //   // var conditionCode = javascriptGenerator.valueToCode(block, value.name, javascriptGenerator.ORDER_NONE);
-    //   //var tagCode = javascriptGenerator.valueToCode(block, 'TAG', javascriptGenerator.ORDER_ATOMIC);
-    //   var conditionCode = javascriptGenerator.valueToCode(
-    //     block,
-    //     "HAP",
-    //     javascriptGenerator.ORDER_NONE
-    //   );
-
-    //   return [value.name + "(" + conditionCode + ")", null];
-    // };
 
     javascriptGenerator[value.name] = function (block) {
       var argCodeList = [];
@@ -278,46 +297,8 @@ const registerFunctionBlocks = (functionList) => {
 
 const registerSoPBlocks = () => {
   registerTagBlocks(tagList);
+  registerValBlocks(valList);
   registerFunctionBlocks(functionList);
-
-  // let compareBlock = {
-  //   type: "logic_operation",
-  //   message0: "%1 %2 %3",
-  //   args0: [
-  //     { type: "input_value", name: "A", check: "Boolean" },
-  //     {
-  //       type: "field_dropdown",
-  //       name: "OP",
-  //       options: [
-  //         ["%{BKY_LOGIC_OPERATION_AND}", "AND"],
-  //         ["%{BKY_LOGIC_OPERATION_OR}", "OR"],
-  //       ],
-  //     },
-  //     { type: "input_value", name: "B", check: "Boolean" },
-  //   ],
-  //   inputsInline: !0,
-  //   output: "Boolean",
-  //   style: "logic_blocks",
-  //   helpUrl: "%{BKY_LOGIC_OPERATION_HELPURL}",
-  //   extensions: ["logic_op_tooltip"],
-  // };
-
-  //   if () {
-  //     if(){
-  //       return ['(#' + value.name +' '+ conditionCode + ').\n', null];
-  //     } else {
-  //       return ['#' + value.name, null];
-  //     }
-  //   } else {
-  //     return ['(#' + value.name + ').'+ conditionCode +'\n', null];
-
-  // };
-
-  // if (block.ORDER_ATOMIC<0) {
-  //   return ['#' + value.name, null];
-  // } else {
-  //   return ['(#' + value.name +' '+ conditionCode + ').\n', null];
-  // }
 };
 
 const renderSoPBlocks = () => {
@@ -329,6 +310,11 @@ const renderSoPBlocks = () => {
   }
 
   for (const [key, value] of Object.entries(functionList)) {
+    // console.log(key, value);
+    toRender.push(<Block type={value.name} />);
+  }
+
+  for (const [key, value] of Object.entries(valList)) {
     // console.log(key, value);
     toRender.push(<Block type={value.name} />);
   }
@@ -361,33 +347,27 @@ function App(props) {
         >
           {/* <Block type="test_function_service_field"/>
             <Block type="test_value_service_field"/> */}
-
-          {renderSoPBlocks()}
+          <Block type="test_compare_field" />
+          <Block type="assign" />
+          <Block type="my_variable" />
+          <Block type="test_tag_list_field" />
 
           <Block type="test_loop_field" />
           <Block type="test_wait_until_field" />
           <Block type="test_if_field" />
           <Block type="test_else_field" />
-
+          {renderSoPBlocks()}
           {/* <Block type="test_tag_field"/> */}
-
           {/* <Block type="test_space_field"/>
             <Block type="test_rb_field"/>
             <Block type="test_lb_field"/> */}
-
-          <Block type="test_tag_list_field" />
-
-          <Block type="logic_boolean" />
+          {/* <Block type="logic_boolean" />
           <Block type="logic_compare" />
-          <Block type="logic_operation" />
-          <Block type="assign" />
-          <Block type="my_variable" />
-
+          <Block type="logic_operation" />  */}
           {/* <Block type="test_react_field" />
             <Block type="test_react_date_field" /> */}
           {/* <Block type="controls_ifelse" /> */}
           {/* <Block type="test_else_if_field"/> */}
-
           {/* <Block type="controls_repeat_ext">
               <Value name="TIMES">
                 <Shadow type="math_number">
