@@ -37,7 +37,7 @@ javascriptGenerator["test_react_date_field"] = function (block) {
 javascriptGenerator["test_loop_field"] = function (block) {
   var substring = javascriptGenerator.statementToCode(block, "DO");
   return (
-    "LOOP(" +
+    "loop(" +
     block.getField("TIMES").getText() +
     " " +
     block.getField("FIELDNAME").getText() +
@@ -67,13 +67,13 @@ javascriptGenerator["test_if_field"] = function (block) {
   );
   var doCode = javascriptGenerator.statementToCode(block, "DO");
 
-  return "IF (" + conditionCode + ") {\n" + doCode + "}\n";
+  return "if (" + conditionCode + ") {\n" + doCode + "}\n";
 };
 
 javascriptGenerator["test_else_field"] = function (block) {
   var doCode = javascriptGenerator.statementToCode(block, "DO");
 
-  return "ELSE {\n" + doCode + "}\n";
+  return "else {\n" + doCode + "}\n";
 };
 
 javascriptGenerator["test_else_if_field"] = function (block) {
@@ -99,6 +99,60 @@ javascriptGenerator["test_else_if_field"] = function (block) {
 //   return ["(" + conditionCode1 + ")." + conditionCode2, null];
 // };
 
+// javascriptGenerator["test_tag_list_field"] = function (block) {
+//   var conditionCode1 = javascriptGenerator
+//     .valueToCode(block, "CONDITION1", javascriptGenerator.ORDER_NONE)
+//     .trim();
+//   var conditionCode2 = javascriptGenerator.valueToCode(
+//     block,
+//     "CONDITION2",
+//     javascriptGenerator.ORDER_NONE
+//   );
+//   return ["(" + conditionCode1 + ")." + conditionCode2, null];
+// };
+
+// javascriptGenerator["test_tag_list_field"] = function (block) {
+//   var conditionCode1 = javascriptGenerator
+//     .valueToCode(block, "CONDITION1", javascriptGenerator.ORDER_NONE)
+//     .trim();
+//   var conditionCode2 = javascriptGenerator.valueToCode(
+//     block,
+//     "CONDITION2",
+//     javascriptGenerator.ORDER_NONE
+//   );
+
+//   // Check if there is a next block
+//   var nextBlock = block.getNextBlock();
+//   if (nextBlock) {
+//     // Generate code for the next block and append it
+//     return [
+//       "(" +
+//         conditionCode1 +
+//         ")." +
+//         conditionCode2 +
+//         javascriptGenerator.statementToCode(nextBlock),
+//       null,
+//     ];
+//   } else {
+//     // If there is no next block, just return the generated code for this block
+//     return ["(" + conditionCode1 + ")." + conditionCode2, null];
+//   }
+// };
+// Define a custom function to get code from the statement block.
+function getStatementCode(block) {
+  var statementCode = "";
+  var doBlock = block.getInputTargetBlock("test_tag_list_field");
+  while (doBlock) {
+    var currentCode = javascriptGenerator.blockToCode(doBlock);
+    if (currentCode) {
+      statementCode += currentCode;
+    }
+    doBlock = doBlock.getNextBlock();
+  }
+  return statementCode;
+}
+
+// Modify the test_tag_list_field generator to handle if block "do" section.
 javascriptGenerator["test_tag_list_field"] = function (block) {
   var conditionCode1 = javascriptGenerator
     .valueToCode(block, "CONDITION1", javascriptGenerator.ORDER_NONE)
@@ -108,7 +162,26 @@ javascriptGenerator["test_tag_list_field"] = function (block) {
     "CONDITION2",
     javascriptGenerator.ORDER_NONE
   );
-  return "(" + conditionCode1 + ")." + conditionCode2;
+
+  var code = "(" + conditionCode1 + ")." + conditionCode2;
+
+  try {
+    // Try getting the code as a tuple (value block).
+    var tuple = [
+      getStatementCode(block) + code,
+      javascriptGenerator.ORDER_NONE,
+    ];
+    return tuple;
+  } catch (e) {
+    // If it's not a tuple, get the code from the statement block if it exists.
+    var statementCode = getStatementCode(block);
+    if (statementCode !== "") {
+      return statementCode + code;
+    } else {
+      // If no code in the statement block, return an empty tuple.
+      return ["", javascriptGenerator.ORDER_NONE];
+    }
+  }
 };
 
 javascriptGenerator["test_compare_field"] = function (block) {

@@ -33,6 +33,7 @@ import { javascriptGenerator, generator } from "blockly/javascript";
 var functionList = [
   { name: "get_news", use_arg: 0, arguments: [] },
   { name: "get_weather", use_arg: 0, arguments: [] },
+  { name: "get_lunch_menu", use_arg: 0, arguments: [] },
   { name: "get_time", use_arg: 0, arguments: [] },
   { name: "turn_on", use_arg: 0, arguments: [] },
   { name: "turn_off", use_arg: 0, arguments: [] },
@@ -40,8 +41,10 @@ var functionList = [
   { name: "start_cleaning", use_arg: 0, arguments: [] },
   { name: "stop_cleaning", use_arg: 0, arguments: [] },
   { name: "alarm", use_arg: 0, arguments: [] },
+  { name: "capture", use_arg: 0, arguments: [] },
   { name: "take_picture", use_arg: 1, arguments: [{ name: "arg1" }] },
   { name: "speak", use_arg: 1, arguments: [{ name: "arg1" }] },
+  { name: "tts", use_arg: 1, arguments: [{ name: "arg1" }] },
   {
     name: "set_temperature",
     use_arg: 1,
@@ -60,26 +63,27 @@ var functionList = [
 ];
 
 var tagList = [
-  { name: "vaccum_robot" },
+  { name: "vaccum" },
+  { name: "living_room" },
+  { name: "fire" },
+  { name: "person" },
+  { name: "somewhere" },
+  { name: "movement_sensor" },
+  { name: "util" },
   { name: "news" },
-  { name: "humidifier" },
+  { name: "env" },
   { name: "speaker" },
   { name: "camera" },
-  { name: "TV" },
-  { name: "meering_room" },
+  { name: "meeting_room" },
   { name: "clock" },
   { name: "light" },
   { name: "office" },
   { name: "door" },
   { name: "air_conditioner" },
   { name: "living_room" },
-  { name: "movement" },
   { name: "email" },
-  { name: "induction_stove" },
   { name: "printer" },
-  { name: "microwave" },
-  { name: "oven" },
-  { name: "computer" },
+  { name: "screen" },
   { name: "air_cleaner" },
   { name: "thermostat" },
 ];
@@ -87,14 +91,14 @@ var tagList = [
 var valList = [
   { name: "detected" },
   { name: "humidity" },
+  { name: "movement" },
+  { name: "sound" },
   { name: "HOUR" },
   { name: "temperature" },
   { name: "dust" },
   { name: "brightness" },
   { name: "MINUTE" },
-  { name: "number_of_people" },
-  { name: "mood" },
-  { name: "DATE" },
+  { name: "people" },
 ];
 
 const registerValBlocks = (valList) => {
@@ -168,6 +172,8 @@ const registerAssignBlock = () => {
     inputsInline: !0,
     output: "String",
     colour: 38.8,
+    previousStatement: null,
+    nextStatement: null,
   };
 
   Blockly.Blocks["assign"] = {
